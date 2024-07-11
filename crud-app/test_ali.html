@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+</head>
+<body>
+    <h1>Employee CRUD Operations</h1>
+    <button onclick="createEmployee()">Create</button>
+    <button onclick="readEmployees()">Read</button>
+    <button onclick="updateEmployee()">Update</button>
+    <button onclick="deleteEmployee()">Delete</button>
+
+    <script>
+        const apiUrl = 'https://2jyozctm10.execute-api.us-east-1.amazonaws.com/items';
+
+        async function createEmployee() {
+            const employee = {
+                name: 'John Doe',
+                position: 'Developer',
+                // Add other necessary fields
+            };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(employee),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log('Employee created:', data);
+            } catch (error) {
+                console.error('Failed to create employee:', error);
+            }
+        }
+
+        async function readEmployees() {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log('Employees:', data);
+            } catch (error) {
+                console.error('Failed to fetch employees:', error);
+            }
+        }
+
+        async function updateEmployee() {
+            const employeeId = '123'; // Replace with actual employee ID
+            const updatedEmployee = {
+                name: 'Jane Doe',
+                position: 'Senior Developer',
+                // Add other necessary fields
+            };
+            try {
+                const response = await fetch(`${apiUrl}/${employeeId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedEmployee),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log('Employee updated:', data);
+            } catch (error) {
+                console.error('Failed to update employee:', error);
+            }
+        }
+
+        async function deleteEmployee() {
+            const employeeId = '123'; // Replace with actual employee ID
+            try {
+                const response = await fetch(`${apiUrl}/${employeeId}`, {
+                    method: 'DELETE',
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log('Employee deleted');
+            } catch (error) {
+                console.error('Failed to delete employee:', error);
+            }
+        }
+    </script>
+</body>
+</html>
