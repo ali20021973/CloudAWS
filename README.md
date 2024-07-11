@@ -124,14 +124,9 @@ aws-crud-app/
 
 5. Access your application via the EC2 instance's public IP.
 
-## Demo
-
-![Demo](demo.png)
 
 ## Conclusion
 
 This AWS CRUD application demonstrates how to leverage AWS services like Lambda and EC2, along with MongoDB and React, to build a scalable, cloud-based application. Feel free to explore the code, make changes, and deploy your own version!
 
----
-
-Feel free to customize any sections as per your project's specifics!
+---=
